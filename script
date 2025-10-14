@@ -1,0 +1,12 @@
+실행 순서
+
+1. ros core 포트 분리 (병렬 실행)
+roscore -p 11311
+roscore -p 11312
+
+2. 로봇팔 및 로봇핸드 연결
+roslaunch mk_moveit_config demo_gazebo.launch
+- 시뮬레이션 연동
+- IK 계산
+- Control Glove 센서 데이터 필터 처리
+- 
