@@ -1,5 +1,0 @@
-roscore -p 11311
-
-roslaunch mk_moveit_config demo_gazebo.luanch
-
-roslaunch realsense2_camera rs_camera.launch
