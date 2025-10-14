@@ -8,8 +8,7 @@ options = {
 
   map_frame = "map",                            -- SLAM이 생성한 전역 맵 프레임 이름
   -- tracking_frame = "imu_link",               -- (사용 안 함) IMU 기준 좌표 프레임
-  tracking_frame = "camera_gyro_frame",                 -- 로봇의 위치 추적에 사용하는 프레임 (IMU 없을 경우 base_link 사용)
-  -- tracking_frame = "camera_gyro_link222",
+  tracking_frame = "gyro_frame",                 -- 로봇의 위치 추적에 사용하는 프레임 (IMU 없을 경우 base_link 사용)
   published_frame = "base_footprint",                -- pose가 퍼블리시될 기준 프레임, 원래는 base_link
   odom_frame = "odom",                          -- 로봇의 로컬 오도메트리 프레임
   provide_odom_frame = true,                    -- odom -> tracking_frame(tf 연결)을 cartographer가 제공할지 여부
