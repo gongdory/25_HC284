@@ -2,11 +2,36 @@
 
 1. ros core 포트 분리 (병렬 실행)
 roscore -p 11311
+- 상단 로봇(로봇팔, 로봇핸드)
 roscore -p 11312
+- 자율주행 모바일부
 
 2. 로봇팔 및 로봇핸드 연결
 roslaunch mk_moveit_config demo_gazebo.launch
 - 시뮬레이션 연동
 - IK 계산
 - Control Glove 센서 데이터 필터 처리
-- 
+- 로봇 제어 명령
+
+3. 센서부
+roslaunch realsense2_camera rs_camera.launch
+- vision 데이터 수집
+- HSV 색상 인식 기반 좌표 추출
+- 픽셀 좌표 - 로봇 좌표 맵핑
+- IMU 센서 데이터 노드
+- IMU 드리프트 초기화 및 offset 보정 노드
+
+4. 자율주행
+roslaunch mk_mobile_description display.launch
+roslaunch cartographer_ros my_robot.launch
+roslaunch mk_mobile_navigation move_base.launch
+
+5. MCU 연동 (ros serial)
+rosrun rosserial_python serial_node.py /dev/openCR __name:=openCR_node
+rosrun rosserial_python serial_node.py /dev/stm32f429zit6 __name:=stm_control_node
+
+6. 코어 간 토픽 공유
+rosrun fkie_master_discovery master_discovery
+
+rosparam set /master_sync/sync_topics "['/camera/color/image_raw/compressed']"
+rosrun fkie_master_sync master_sync
